@@ -7,14 +7,6 @@ body {
 }
 
 /* line 10, style.scss */
-#header {
-  background-image: url("images/wallpaper.png");
-  background-repeat: repeat-x;
-  height: 200px;
-  border-bottom: 4px solid white;
-}
-
-/* line 19, style.scss */
 #menu {
   position: fixed;
   left: 50%;
@@ -26,18 +18,60 @@ body {
   width: 450px;
   border-radius: 5px;
 }
-/* line 29, style.scss */
+/* line 20, style.scss */
 #menu a {
   margin: 5px;
   display: inline-block;
   text-decoration: none;
   color: #9BC3D2;
+  font-size: 28px;
 }
-/* line 34, style.scss */
+/* line 26, style.scss */
 #menu a:hover {
   color: #5A7B63;
 }
-/* line 38, style.scss */
+/* line 30, style.scss */
 #menu a::first-letter {
   color: #FF376F;
+}
+
+/* line 35, style.scss */
+#header {
+  background-image: url("images/wallpaper.png");
+  background-repeat: repeat-x;
+  height: 200px;
+  border-bottom: 5px solid white;
+}
+
+/* line 44, style.scss */
+#container {
+  font-family: 'Nunito', sans-serif;
+  width: 50%;
+  margin-top: 30px;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 4px;
+  padding: 0px 10px 5px 10px;
+}
+/* line 55, style.scss */
+#container .article .title {
+  font-style: italic;
+  font-size: 25px;
+  color: #9BC3D2;
+}
+/* line 59, style.scss */
+#container .article .title::first-letter {
+  color: #FF376F;
+}
+/* line 63, style.scss */
+#container .article .text {
+  margin-left: 20px;
+}
+/* line 67, style.scss */
+#container .separator {
+  border-bottom: 1px solid #FF376F;
+  margin: 20px 40px 20px 40px;
+  height: 1px;
 }

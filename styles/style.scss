@@ -7,15 +7,6 @@ body {
     padding: 0;
 }
 
-#header {
-    background: {
-        image: url('images/wallpaper.png');
-        repeat: repeat-x;
-    }
-    height: 200px;
-    border-bottom: 4px solid white;
-}
-
 #menu {
     position: fixed;
     left: 50%;
@@ -31,11 +22,51 @@ body {
         display: inline-block;
         text-decoration: none;
         color: #9BC3D2;
+        font-size: 28px;
         &:hover {
             color: #5A7B63;
         }
     }
     a::first-letter {
         color: #FF376F;
+    }
+}
+
+#header {
+    background: {
+        image: url('images/wallpaper.png');
+        repeat: repeat-x;
+    }
+    height: 200px;
+    border-bottom: 5px solid white;
+}
+
+#container {
+    font-family: 'Nunito', sans-serif;
+    width: 50%;
+    margin-top: 30px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 0px 10px 5px 10px;
+    .article {
+        .title {
+            font-style: italic;
+            font-size: 25px;
+            color: #9BC3D2;
+            &::first-letter {
+                color: #FF376F;
+            }
+        }
+        .text {
+            margin-left: 20px;
+        }
+    }
+    .separator {
+        border-bottom: 1px solid #FF376F;
+        margin: 20px 40px 20px 40px;
+        height: 1px;
     }
 }

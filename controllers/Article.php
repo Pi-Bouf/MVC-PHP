@@ -3,7 +3,7 @@
 class ArticleController extends Controller{
 	public function listArticle()
 	{
-		$articles = ArticleModel::getAllOffset(30, 0);
+		$articles = ArticleModel::getAllOffset(5, 0);
 		$this->set(array('articles' => $articles));
 		$this->render('listArticle');
 	}
