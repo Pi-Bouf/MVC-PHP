@@ -1,0 +1,41 @@
+body {
+    background: {
+        image: url('images/background.png');
+        size: 640px 400px;
+    }
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background: {
+        image: url('images/wallpaper.png');
+        repeat: repeat-x;
+    }
+    height: 200px;
+    border-bottom: 4px solid white;
+}
+
+#menu {
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    background-color: white;
+    margin-left: -225px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    width: 450px;
+    border-radius: 5px;
+    a {
+        margin: 5px;
+        display: inline-block;
+        text-decoration: none;
+        color: #9BC3D2;
+        &:hover {
+            color: #5A7B63;
+        }
+    }
+    a::first-letter {
+        color: #FF376F;
+    }
+}

@@ -1,0 +1,43 @@
+/* line 1, style.scss */
+body {
+  background-image: url("images/background.png");
+  background-size: 640px 400px;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 10, style.scss */
+#header {
+  background-image: url("images/wallpaper.png");
+  background-repeat: repeat-x;
+  height: 200px;
+  border-bottom: 4px solid white;
+}
+
+/* line 19, style.scss */
+#menu {
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  background-color: white;
+  margin-left: -225px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  width: 450px;
+  border-radius: 5px;
+}
+/* line 29, style.scss */
+#menu a {
+  margin: 5px;
+  display: inline-block;
+  text-decoration: none;
+  color: #9BC3D2;
+}
+/* line 34, style.scss */
+#menu a:hover {
+  color: #5A7B63;
+}
+/* line 38, style.scss */
+#menu a::first-letter {
+  color: #FF376F;
+}
