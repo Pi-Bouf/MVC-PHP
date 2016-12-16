@@ -2,7 +2,7 @@
     <?php
     foreach($articles as $key => $value) {
         echo '<div class="article">';
-        echo '<div class="mdi mdi-facebook title">'.$value->titre.'</div>';
+        echo '<div class="title">'.$value->titre.'</div>';
         echo '<div class="text">'.$value->contenu.'</div>';
         echo '</div>';
         echo '<div class="separator"></div>';
