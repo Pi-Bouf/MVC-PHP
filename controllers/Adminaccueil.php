@@ -3,6 +3,7 @@
 class AdminAccueilController extends Controller{
 
 	public function index(){
+		UserModel::isAdmin();
 		$this->render('index');
 	}
 }

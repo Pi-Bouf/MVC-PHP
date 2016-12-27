@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../styles/miw.js"></script>
-    <script src="../styles/snow.js"></script>
+    <!-- <script src="../styles/snow.js"></script> -->
     <link href="../styles/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -16,8 +16,9 @@
 <body>
     <div id="menu">
         <?php
+            // On parcourt le tableau menu pour l'afficher
             foreach($menu as $key => $value) {
-                echo '<a href="#">'.$value.'</a> ';
+                echo '<a href="'.WEBROOT.$key.'">'.$value.'</a> ';
             }
         ?>
     </div>

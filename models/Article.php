@@ -79,7 +79,6 @@ Class ArticleModel extends Model{
     public static function getAllOffset($nbr, $offset){
         $model = self::getInstance();
 		$req = $model->bdd->prepare('SELECT article.id FROM article INNER JOIN user ON article.id_user = user.id LIMIT '.($nbr * $offset).','.$nbr);
-        
         $req->execute();
         $articles = array();
         while($row = $req->fetch()){

@@ -1,15 +1,15 @@
 <?php
-//ALTER TABLE `user` ADD `admin` BOOLEAN NOT NULL DEFAULT FALSE AFTER `actif`;
-/** @todo sécuriser l'administration avec une connexion user */
 class AdminUserController extends Controller{
 
 	public function index(){
+		UserModel::isAdmin();
 		$users = UserModel::getAll();
 		$this->set(array('users'=>$users));
 		$this->render('index');
 	}
 
 	public function createedit(){
+		UserModel::isAdmin();
 		$id = isset($_GET['id'])?$_GET['id']:null;
 		$user = new UserModel($id);
 		$this->set(array('user'=>$user));
@@ -17,6 +17,7 @@ class AdminUserController extends Controller{
 	}
 
 	public function postprocess(){
+		UserModel::isAdmin();
 		if(count($_POST)){
 			$id = isset($_GET['id'])?$_GET['id']:null;
 			$user = new UserModel($id);
@@ -33,6 +34,7 @@ class AdminUserController extends Controller{
 	}
 
 	public function delete(){
+		UserModel::isAdmin();
 		$article = new UserModel($_GET['id']);
 		$article->delete();
 		header('Location: ' . WEBROOT . 'adminuser/index');

@@ -12,6 +12,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '111');
 define('DB_DATABASE', 'newSite');
+session_start();
 
 //include automatique des classes
 //cette fonction sera appelée à chaque new MaClasse si MaClasse n'a pas déjà été incluse

@@ -1,18 +1,12 @@
-<h1>Accueil - index</h1>
-
-<h2>Liste des articles</h2>
-
-<table>
-	<tr>
-		<th>Titre</th>
-		<th>Date</th>
-		<th>Action</th>
-	</tr>
-<?php foreach($articles as $article){ ?>
-	<tr>
-		<td><a href="<?php echo WEBROOT.'article/detail?id='.$article->id ?>"><?php echo $article->titre ?></a></td>
-		<td><?php echo $article->datetime ?></td>
-		<td>TODO</td>
-	</tr>
-<?php } ?>
-</table>
+<div id="container">
+    <?php
+    foreach($articles as $key => $value) {
+        echo '<div class="article">';
+        echo '<div class="title">'.$value->titre.'</div>';
+        echo '<div class="text">'.$value->contenu.'</div>';
+        echo '</div>';
+        echo '<div class="separator"></div>';
+    }
+    ?>
+    <center>1 2 3 4 5 6 7 8 9 10</center>
+</div>

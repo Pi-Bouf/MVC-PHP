@@ -1,7 +1,8 @@
 <?php
 
-class Controller{
-    public $vars = array('menu'=>array('adminarticle'=>'Articles', 'admincommentaire'=>'Commentaires', 'adminuser'=>'Users'));
+class Controller {
+    public $vars = array('menu'=>array('article/listarticle'=>'Articles', 'admincommentaire'=>'Commentaires', 'adminuser'=>'Utilisateurs'),
+                         'menuAdmin'=>array('adminarticle/index'=>"Gestion articles", "admincommentaire/index" => "Gestion commentaires", "adminuser/index" => "Gestion utilisateurs", "export/index" => "Exporter CSV"));
     
     function set($d){
         $this->vars = array_merge($this->vars, $d);

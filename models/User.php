@@ -91,4 +91,36 @@ class UserModel extends Model{
         }
         return $users;
     }
+
+    public static function userConnect($login, $pass) {
+        $model = self::getInstance();
+
+        $req = $model->bdd->prepare('SELECT id FROM user WHERE name = :name AND password = :password');
+        $req->bindValue('name', $login, PDO::PARAM_STR);
+        $req->bindValue('password', $pass, PDO::PARAM_STR);
+        $req->execute();
+        if($req->rowCount() == 1) {
+            $data = $req->fetch();
+            $_SESSION['user_logged'] = $data['id'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function isAdmin() {
+        if(isset($_SESSION['user_logged'])) {
+            $user = new UserModel($_SESSION['user_logged']);
+            if(!($user->actif == 1 && $user->admin == 1)) {
+                header("Location:".WEBROOT."connexion/login");
+            }
+        } else {
+            header("Location:".WEBROOT."connexion/login");
+        }
+    }
+
+    public static function userDisconnect() {
+        session_unset();
+        session_destroy();
+    }
 }

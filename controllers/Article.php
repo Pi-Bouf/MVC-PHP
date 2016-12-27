@@ -7,6 +7,7 @@ class ArticleController extends Controller{
 		$this->set(array('articles' => $articles));
 		$this->render('listArticle');
 	}
+	
 	public function detail()
 	{
 		$id = $_GET['id'];
