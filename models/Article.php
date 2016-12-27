@@ -78,7 +78,7 @@ Class ArticleModel extends Model{
     
     public static function getAllOffset($nbr, $offset){
         $model = self::getInstance();
-		$req = $model->bdd->prepare('SELECT article.id FROM article INNER JOIN user ON article.id_user = user.id LIMIT '.($nbr * $offset).','.$nbr);
+		$req = $model->bdd->prepare('SELECT article.id FROM article INNER JOIN user ON article.id_user = user.id  ORDER BY article.datetime DESC LIMIT '.($nbr * $offset).','.$nbr.'');
         $req->execute();
         $articles = array();
         while($row = $req->fetch()){
@@ -86,5 +86,12 @@ Class ArticleModel extends Model{
             $articles[] = $article;
         }
         return $articles;
+    }
+
+    public static function getNbrTotal() {
+        $model = self::getInstance();
+		$req = $model->bdd->prepare('SELECT id FROM article');
+        $req->execute();
+        return $req->rowCount();
     }
 }

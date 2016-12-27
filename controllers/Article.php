@@ -1,13 +1,6 @@
 <?php
 
 class ArticleController extends Controller{
-	public function listArticle()
-	{
-		$articles = ArticleModel::getAllOffset(5, 0);
-		$this->set(array('articles' => $articles));
-		$this->render('listArticle');
-	}
-	
 	public function detail()
 	{
 		$id = $_GET['id'];

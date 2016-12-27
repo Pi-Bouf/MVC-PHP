@@ -14,14 +14,13 @@ if(isset($_GET['p']) && !empty($_GET['p'])){
 	$controller = $param[0];
 	$action = $param[1];
 }else{
-	//sinon on défini un controller et une action par défaut
-	$controller = 'Accueil';
-	$action = 'index';
+	// Sinon on renvoi sur l'accueil
+	header("Location: ".WEBROOT."accueil/index");
 }
 
 $controller .= 'Controller';
 
-//on instancie notre controller, $controller est une variable nommée qui vaudra par exemple AccueilControlelr, ça reviendrai donc à faire new AccueilController
+//on instancie notre controller, $controller est une variable nommée qui vaudra par exemple AccueilControler, ça reviendrai donc à faire new AccueilController
 $cont = new $controller();
 
 if(method_exists($controller, $action)){
