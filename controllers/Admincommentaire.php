@@ -2,6 +2,10 @@
 
 class AdminCommentaireController extends Controller{
 
+	/**
+	* Procédure affichant l'index de l'administration des commentaires
+	* Affichage de tout les commentaires
+	*/
 	public function index() {
 		UserModel::isAdmin();
 		$commentaires = CommentaireModel::getAll();
@@ -9,6 +13,10 @@ class AdminCommentaireController extends Controller{
 		$this->render('index');
 	}
 
+	/**
+	* Procédure affichant la page de modification d'un commentaire
+	* S'il y a un ID par GET, alors modif
+	*/
 	public function edit() {
 		UserModel::isAdmin();
 		// Si on a un id en GET, on charge le commentaire, sinon on sort
@@ -21,6 +29,10 @@ class AdminCommentaireController extends Controller{
 		}
 	}
 
+	/**
+	* Procédure appellé lors de la validation d'un formulaire
+	* Elle crée ou modifie le commentaire
+	*/
 	public function postprocess(){
 		UserModel::isAdmin();
 		//on vérifie si on a bien des donnee POST envoyée
@@ -35,6 +47,10 @@ class AdminCommentaireController extends Controller{
 		header('Location: ' . WEBROOT . 'admincommentaire/index');
 	}
 
+	/**
+	* Procédure appellé lors de la suppression du commentaire
+	* Supprime le commentaire et revient sur l'index
+	*/
 	public function delete(){
 		UserModel::isAdmin();
 		$commentaire = new CommentaireModel($_GET['id']);

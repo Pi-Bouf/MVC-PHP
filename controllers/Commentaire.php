@@ -2,6 +2,10 @@
 
 class CommentaireController extends Controller{
 	
+	/**
+	* Procédure appellé lors de la validation d'un formulaire
+	* Elle crée le commentaire
+	*/
 	public function postprocess()
 	{
 		UserModel::isActif();

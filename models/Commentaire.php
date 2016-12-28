@@ -8,6 +8,9 @@ class CommentaireModel extends Model{
     public $id_article;
     public $datetime;
 
+    /**
+    * @param int $id Identifiant du commentaire
+    */
     public function __construct($id=null) {
 		parent::__construct();
         if(!is_null($id)){
@@ -22,8 +25,10 @@ class CommentaireModel extends Model{
         }
     }
 
-    public function create(){
-        
+    /**
+    *  Insère dans MySQL un commentaire
+    */
+    public function create(){        
         $req = $this->bdd->prepare('INSERT INTO commentaire (titre, contenu, id_user, id_article, datetime)'
                 . ' VALUES(:titre, :contenu, :id_user, :id_article, NOW())');
         $req->bindValue('titre', $this->titre, PDO::PARAM_STR);
@@ -33,6 +38,11 @@ class CommentaireModel extends Model{
         $req->execute();
         $this->id = $this->bdd->lastInsertId();
     }
+
+    /**
+    * @param int $id Identifiant du commentaire
+    * @return array Tableau (d'une ligne) contenant le commentaire demandé
+    */
     public function select($id){
         
         $req = $this->bdd->prepare('SELECT * FROM commentaire WHERE id = :id');
@@ -40,6 +50,10 @@ class CommentaireModel extends Model{
         $req->execute();
         return $req->fetch();
     }
+
+    /**
+    * Mise à jour des informations
+    */
     public function update(){
         
         $req = $this->bdd->prepare('UPDATE commentaire SET titre=:titre, contenu=:contenu, '
@@ -51,6 +65,10 @@ class CommentaireModel extends Model{
         $req->bindValue('id_article', $this->id_article, PDO::PARAM_INT);
         $req->execute();
     }
+
+    /**
+    * Suppression du commentaire dans MySQL
+    */
     public function delete(){
         
         $req = $this->bdd->prepare('DELETE FROM commentaire WHERE id = :id');
@@ -58,6 +76,9 @@ class CommentaireModel extends Model{
         $req->execute();
     }
 
+    /**
+    * Procédure créant si le commentaire n'existe pas ou le met à jour
+    */
     public function save(){
         if($this->id){
             $this->update();
@@ -66,6 +87,10 @@ class CommentaireModel extends Model{
         }
     }
 
+    /**
+    * @return array Tableau de commentaires
+    * Renvoi tout les commentaires de la base
+    */
     public static function getAll(){
 		$model = self::getInstance();
         $req = $model->bdd->prepare('SELECT id FROM commentaire');
@@ -78,7 +103,7 @@ class CommentaireModel extends Model{
         return $commentaires;
     }
 
-        /**
+    /**
     * @param int $id Identifiant de l'article
     * @return array Tableau d'Article
     */
@@ -95,6 +120,10 @@ class CommentaireModel extends Model{
         return $commentaires;
     }
 
+    /**
+    * @param id_article Int Identifiant de l'article
+    * Supprime les commentaires d'un article
+    */
     public static function deleteByArticle($id_article){
 		$model = self::getInstance();
 
@@ -103,6 +132,10 @@ class CommentaireModel extends Model{
         $reqCom->execute();
     }
 
+    /**
+    * @param id_user Int Identifiant d'un utilisateur
+    * Supprime les commentaires d'un utilisateur
+    */
     public static function deleteByUser($id_user){
 		$model = self::getInstance();
 
@@ -111,4 +144,17 @@ class CommentaireModel extends Model{
         $req->execute();
     }
 
+    /**
+    * param name String Date de la sauvegarde
+    * Procédure créant une sauvegarde sous format CSV
+    */
+    public static function export($name)
+    {
+        $csvFile = fopen(ROOT.'upload/backupCSV/'.$name.'_COMMENTAIRE.csv', 'a');
+        $commentaires = CommentaireModel::getAll();
+        foreach($commentaires as $commentaire) {
+            fputcsv($csvFile, array($commentaire->id, $commentaire->titre, $commentaire->contenu, $commentaire->datetime, $commentaire->id_user, $commentaire->id_article));
+        }
+        fclose($csvFile);
+    }
 }

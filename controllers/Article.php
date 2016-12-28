@@ -1,6 +1,11 @@
 <?php
 
 class ArticleController extends Controller{
+
+	/**
+	* Procédure affichant le détail d'un article
+	* Renvoie article + commentaires associés
+	*/
 	public function detail()
 	{
 		$id = $_GET['id'];

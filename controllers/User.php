@@ -1,7 +1,11 @@
 <?php
 
 class UserController extends Controller{
-	/** @todo Créer une méthode pour que l'utilisateur puisse se connecter */
+	
+	/**
+	* Procédure appellé lors de la validation d'un formulaire
+	* Elle connecte l'utilisateur et renvoie sur l'accueil // ou sinon sur la page de connexion
+	*/
 	public function login() {
 		if(isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['password']) && !empty($_POST['password'])) {
 			if(UserModel::userConnect($_POST['login'], hash('sha256', $_POST['password']))) {
@@ -13,12 +17,17 @@ class UserController extends Controller{
 		$this->render('login');
 	}
 
+	/**
+	* Procédure appellé pour déconnecté l'utilisateur
+	*/
 	public function logout() {
         UserModel::userDisconnect();
         $this->render('logout');
     }
 
-	/** @todo Créer une méthode pour que l'utilisateur puisse modifier son profil (sauf les champs actif et admin) */
+	/**
+	* Procédure renvoyant les informations du compte actuellement connecté
+	*/
 	public function myprofile() {
 		UserModel::isActif();
 		$user = new UserModel($_SESSION['user_logged']);
@@ -26,6 +35,10 @@ class UserController extends Controller{
 		$this->render("myprofile");
 	}
 
+	/**
+	* Procédure appellé lors de la validation d'un formulaire
+	* Elle modifie les informations du compte actuellement connecté
+	*/
 	public function postprocess() {
 		UserModel::isActif();
 		if(count($_POST))
@@ -40,9 +53,9 @@ class UserController extends Controller{
 			$user->save();
 			if(!empty($_FILES['avatarImage']['tmp_name'])) {
 				if(move_uploaded_file($_FILES['avatarImage']['tmp_name'], ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'])) {
-					cropImg(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_800.jpg', 800, 800);
-					cropImg(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_500.jpg', 500, 800);
-					cropImg(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_150.jpg', 150, 800);
+					UserModel::cropAvatar(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_800.jpg', 800, 800);
+					UserModel::cropAvatar(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_500.jpg', 500, 800);
+					UserModel::cropAvatar(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_150.jpg', 150, 800);
 					unlink(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name']);
 				}
 			}
@@ -50,6 +63,9 @@ class UserController extends Controller{
 		header('Location:'.WEBROOT.'user/myprofile');
 	}
 
+	/**
+	* Procédure renvoyant la liste des utilisateurs
+	*/
 	public function listuser()
 	{
 		$users = UserModel::getAll();
@@ -57,11 +73,14 @@ class UserController extends Controller{
 		$this->render("listuser");
 	}
 
+	/**
+	* Procédure affichant le détail d'un utilisateur
+	*/
 	public function detail()
 	{
 		$id = $_GET['id'];
 		$user = new UserModel($id);
-		$articlesById = ArticleModel::getAllByUserId($id);
+		$articlesById = ArticleModel::getAll($id);
 		$articlesByCommentId = ArticleModel::getAllByCommentUserId($id);
 		$this->set(array('user' => $user, 'articles' => $articlesById, 'artcommented' => $articlesByCommentId));
 		$this->render('detail');
