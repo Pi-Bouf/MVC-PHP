@@ -7,6 +7,7 @@ define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 require(ROOT . 'core/core.php');
 require(ROOT . 'core/controller.php');
 require(ROOT . 'core/model.php');
+require(ROOT . 'core/observer.php');
 
 // Script de sauvegarde automatique
 require(ROOT . 'includes/cron.php');

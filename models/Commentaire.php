@@ -1,12 +1,13 @@
 <?php
 
-class CommentaireModel extends Model{
+class CommentaireModel extends Model {
     public $id;
     public $titre;
     public $contenu;
     public $id_user;
     public $id_article;
     public $datetime;
+    protected $observers = [];
 
     /**
     * @param int $id Identifiant du commentaire
