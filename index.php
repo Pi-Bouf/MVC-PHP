@@ -3,6 +3,7 @@
 //on définit les constantes qui nous permettrons d'inclure nos fichier n'importe où
 define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
+define('URLROOT', 'http://'.$_SERVER['SERVER_NAME'].WEBROOT);
 //on inclu le coeur de notre MVC
 require(ROOT . 'core/core.php');
 require(ROOT . 'core/controller.php');

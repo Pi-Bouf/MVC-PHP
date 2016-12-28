@@ -11,6 +11,7 @@
         echo '<div class="text">'.$article->contenu;
         echo '<a class="readmore" href="'.WEBROOT.'article/detail?id='.$article->id.'">Voir plus »</a>';
         echo '</div>';
+        // Si la photo existe pas, on met l'image de defaut, sinon la photo de l'article
         $user = new UserModel($article->id_user);
         if(file_exists(ROOT.'upload/users/avatar_'.$user->id.'_150.jpg')) {
             $img = WEBROOT.'upload/users/avatar_'.$user->id.'_150.jpg';
@@ -20,6 +21,9 @@
         echo '<div class="dateauteur">Par <b><a href="'.WEBROOT.'user/detail?id='.$user->id.'">'.$user->name.'</a></b> le <b>'.$article->datetime.'</b><br /><img style="float: right; border-radius: 8px;" src="'.$img.'"></div>';
         echo '<div style="clear: both"></div></div>';
         echo '<div class="separator"></div>';
+        echo '<h2>Partager cet article</h2>';
+        echo '<form method="post" action="'.WEBROOT.'article/share?id='.$article->id.'"><input type="text" name="share" required="required"><input type="submit" value="Partager !"></form>';
+        echo '<div class="separator"></div>';
     ?>
 
 <h2>Commentaires <i>(<?php echo $article->nbCommentaire; ?>)</i></h2>
@@ -27,6 +31,7 @@
     foreach($commentaires as $commentaire) {
         echo '<div class="commentaire">';
         $user = new UserModel($commentaire->id_user);
+        // Si la photo existe pas, on met l'image de defaut, sinon la photo de l'utilisateur
         if(file_exists(ROOT.'upload/users/avatar_'.$user->id.'_150.jpg')) {
             $img = WEBROOT.'upload/users/avatar_'.$user->id.'_150.jpg';
         } else {

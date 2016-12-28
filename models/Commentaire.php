@@ -24,6 +24,7 @@ class CommentaireModel extends Model {
             $this->id_article = $data['id_article'];
             $this->datetime = $data['datetime'];
         }
+        $this->attach(new commentObserverMail);
     }
 
     /**
@@ -38,6 +39,8 @@ class CommentaireModel extends Model {
         $req->bindValue('id_article', $this->id_article, PDO::PARAM_INT);
         $req->execute();
         $this->id = $this->bdd->lastInsertId();
+        // On notifie l'observeur
+        $this->notify();
     }
 
     /**

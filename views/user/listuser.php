@@ -14,7 +14,7 @@
         echo '<i>Email: </i><b>'.$user->email.'</b>';
         echo '<br /><i>Nombre d\'articles: </i><b>'.$user->nbArticle.'</b>';
         echo '<br /><i>Nombre de commentaires: </i><b>'.$user->nbCommentaire.'</b>';
-        echo '<br /><br /><a href="'.WEBROOT.'user/detail?id='.$user->id.'">Voir le profil </a>';
+        echo '<br /><br /><a href="'.WEBROOT.'user/detail?id='.$user->id.'">Voir le profil »</a>';
         echo '</div>';
         echo '<div style="clear: both"></div></div>';
     }

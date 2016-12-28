@@ -45,15 +45,27 @@ class Model implements SplSubject{
 		return self::$instance;
 	}
 
+	/**
+	* @param observer SplObserver
+	* Fonction qui attache un observeur à la classe fille
+	*/
 	public function attach(SplObserver $observer){
             $this->observers[] = $observer;
     }
 
+	/**
+	* @param observer SplObserver
+	* Fonction qui détache un observeur de la classe fille
+	*/
     public function detach(SplObserver $observer){
         if (is_int($key = array_search($observer, $this->observers, true))){
             unset($this->observers[$key]);
         }
     }
+
+	/**
+	* Fonction qui, une fois appellé, va executer la méthode update de chaque observeur
+	*/
     public function notify(){
         foreach ($this->observers as $observer){
             $observer->update($this);

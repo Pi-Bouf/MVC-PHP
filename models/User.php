@@ -247,5 +247,20 @@ class UserModel extends Model{
         }
         fclose($csvFile);
     }
+
+    /**
+    * @param id_user Int Identifiant de l'utilisateur
+    * @param subject String Sujet du message
+    * @param message String Contenu de message
+    * Procédure qui enverra un mail à l'utilisateur désigné
+    */
+    public static function sendMail($mail_user, $subject, $message)
+    {
+        $headers ='From: "Pierre Bouffier"<pierre.bouffier05@gmail.com>'."\n"; 
+        $headers .='Reply-To: "Pierre Bouffier"pierre.bouffier05@gmail.com'."\n"; 
+        $headers .='Content-Type: text/html; charset="utf-8"'."\n"; 
+        $headers .='Content-Transfer-Encoding: 8bit';
+        mail($mail_user, $subject, $message, $headers);
+    }
 }
 ?>
