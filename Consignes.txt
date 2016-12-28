@@ -1,6 +1,3 @@
-Projet MVC
-Gestion des articles
-Un article doit avoir une image de couverture (format de l'image libre). Si l'image est absente, prévoir l'affichage d'une image par défaut.
 Export
 Créer 3 scripts d'export CSV pour les utilisateurs, articles, et commentaires. Format d'export :
 Utilisateurs :
@@ -10,12 +7,7 @@ id, titre, contenu, date (format Y-m-d H:i:s), id_auteur, nb commentaires
 Commentaires :
 id, titre, contenu, date (format Y-m-d H:i:s), id_auteur, id_article
 
-Front:
-Accueil
-Affichage des 10 derniers articles (titre, date, auteur et image de couverture) avec pagination pour voir les articles plus anciens
 Page d'un article
-Afficher le détail (auteur (nom, image 150*150), image de couverture, titre, date, contenu) et les commentaires sous l'article.
-Sous la liste de commentaires : afficher le formulaire pour créer un nouveau commentaire. (un utilisateur doit être connecté pour laisser un commentaire)
 À l'enregistrement du commentaire, l'auteur doit être averti par e-mail (en utilisant le design pattern observer)
 Sur le nom de l'auteur, mettre un lien vers son profil.
 Auteurs

@@ -77,63 +77,148 @@ body {
 #container .list table th {
   width: 30%;
 }
-/* line 72, style.scss */
+/* line 70, style.scss */
+#container .list .titre {
+  font-weight: bold;
+  font-size: 35px;
+  color: #9BC3D2;
+}
+/* line 74, style.scss */
+#container .list .titre::first-letter {
+  color: #FF376F;
+}
+/* line 79, style.scss */
+#container .listArticle {
+  text-align: center;
+}
+/* line 81, style.scss */
+#container .listArticle img {
+  width: 90%;
+  height: auto;
+  border-radius: 5px;
+}
+/* line 86, style.scss */
+#container .listArticle .titre {
+  font-weight: bold;
+  font-size: 25px;
+}
+/* line 92, style.scss */
 #container .article .title {
   font-style: italic;
   font-size: 25px;
   color: #9BC3D2;
 }
-/* line 76, style.scss */
+/* line 96, style.scss */
 #container .article .title::first-letter {
   color: #FF376F;
 }
-/* line 80, style.scss */
+/* line 100, style.scss */
 #container .article .image {
   margin-top: 5px;
   margin-bottom: 15px;
   text-align: center;
 }
-/* line 84, style.scss */
+/* line 104, style.scss */
 #container .article .image img {
   width: 90%;
+  height: auto;
   border-radius: 5px;
 }
-/* line 89, style.scss */
+/* line 110, style.scss */
 #container .article .text {
   margin-left: 20px;
 }
-/* line 92, style.scss */
+/* line 113, style.scss */
 #container .article .dateauteur {
   float: right;
   font-size: 14px;
   font-style: italic;
 }
-/* line 98, style.scss */
+/* line 118, style.scss */
+#container .article .readmore {
+  margin-top: 20px;
+  display: block;
+}
+/* line 123, style.scss */
+#container .commentaire {
+  width: 90%;
+  margin-top: 20px;
+}
+/* line 126, style.scss */
+#container .commentaire .content {
+  float: left;
+  width: 70%;
+  margin-left: 10px;
+}
+/* line 130, style.scss */
+#container .commentaire .content .titre {
+  font-style: italic;
+  font-size: 14px;
+  font-weight: bold;
+  color: #9BC3D2;
+}
+/* line 137, style.scss */
+#container .commentaire .avatar {
+  min-width: 150px;
+  text-align: center;
+  width: 20%;
+  float: left;
+}
+/* line 142, style.scss */
+#container .commentaire .avatar img {
+  border-radius: 8px;
+}
+/* line 146, style.scss */
+#container .commentaire .auteurdate {
+  margin-top: 30px;
+  font-size: 13px;
+}
+/* line 152, style.scss */
+#container .userList img {
+  float: left;
+  margin: 10px;
+  border-radius: 8px;
+}
+/* line 157, style.scss */
+#container .userList .content {
+  float: left;
+  margin-top: 15px;
+}
+/* line 160, style.scss */
+#container .userList .content .name {
+  font-size: 20px;
+  color: #9BC3D2;
+}
+/* line 163, style.scss */
+#container .userList .content .name::first-letter {
+  color: #FF376F;
+}
+/* line 169, style.scss */
 #container .separator {
   border-bottom: 1px solid #FF376F;
-  margin: 60px 40px 20px 40px;
+  margin: 30px 40px 20px 40px;
   height: 1px;
 }
-/* line 103, style.scss */
+/* line 174, style.scss */
 #container h2 {
   font-style: italic;
   font-size: 25px;
   color: #9BC3D2;
 }
-/* line 107, style.scss */
+/* line 178, style.scss */
 #container h2::first-letter {
   color: #FF376F;
 }
-/* line 111, style.scss */
+/* line 182, style.scss */
 #container form {
   width: 60%;
   margin-left: 20%;
 }
-/* line 114, style.scss */
+/* line 185, style.scss */
 #container form label {
   font-size: 20px;
 }
-/* line 117, style.scss */
+/* line 188, style.scss */
 #container form select {
   width: 100%;
   padding: 14px;
@@ -142,7 +227,7 @@ body {
   display: block;
   margin-bottom: 20px;
 }
-/* line 125, style.scss */
+/* line 196, style.scss */
 #container form textarea {
   width: 100%;
   height: 200px;
@@ -152,7 +237,7 @@ body {
   display: block;
   margin-bottom: 20px;
 }
-/* line 134, style.scss */
+/* line 205, style.scss */
 #container form input {
   width: 100%;
   padding: 14px;
@@ -161,7 +246,7 @@ body {
   display: block;
   margin-bottom: 20px;
 }
-/* line 142, style.scss */
+/* line 213, style.scss */
 #container form input[type="submit"] {
   width: 50%;
   margin-left: 25%;
@@ -175,22 +260,22 @@ body {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
 }
-/* line 155, style.scss */
+/* line 226, style.scss */
 #container form input[type="radio"] {
   padding: 0px;
   margin-bottom: 0px;
   width: 20px;
   display: inline;
 }
-/* line 161, style.scss */
+/* line 232, style.scss */
 #container form .radio {
   font-size: 12px;
 }
-/* line 165, style.scss */
+/* line 236, style.scss */
 #container #menuAdmin {
   text-align: center;
 }
-/* line 167, style.scss */
+/* line 238, style.scss */
 #container #menuAdmin a {
   margin: 5px;
   display: inline-block;
@@ -198,11 +283,11 @@ body {
   color: #9BC3D2;
   font-size: 15px;
 }
-/* line 173, style.scss */
+/* line 244, style.scss */
 #container #menuAdmin a:hover {
   color: #5A7B63;
 }
-/* line 177, style.scss */
+/* line 248, style.scss */
 #container #menuAdmin a::first-letter {
   color: #FF376F;
 }

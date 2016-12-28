@@ -32,6 +32,9 @@ class AdminArticleController extends Controller{
 			$article->id_user = $user->id;
 			$article->datetime = date('Y-m-d H:i:s');
 			$article->save();
+			if(!empty($_FILES['articleImage']['tmp_name'])) {
+				move_uploaded_file($_FILES['articleImage']['tmp_name'], ROOT.'upload/article/'.$article->id.substr($_FILES['articleImage']['name'], strlen($_FILES['articleImage']['name']) - 4, 4));
+			}
 		}
 		header('Location: ' . WEBROOT . 'adminarticle/index');
 	}
@@ -43,3 +46,4 @@ class AdminArticleController extends Controller{
 		header('Location: ' . WEBROOT . 'adminarticle/index');
 	}
 }
+?>

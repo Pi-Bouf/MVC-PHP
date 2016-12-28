@@ -6,6 +6,7 @@ Class ArticleModel extends Model{
     public $contenu;
     public $id_user;
     public $datetime;
+    public $nbCommentaire;
     
     public function __construct($id=null) {
         parent::__construct();
@@ -18,6 +19,7 @@ Class ArticleModel extends Model{
             $tmpDate = DateTime::createFromFormat('Y-m-d H:i:s', $data['datetime']);
             $tmpDate = $tmpDate !== false ? $tmpDate->format('d/m/Y à H:i:s') : $data['datetime'];
             $this->datetime = $tmpDate;
+            $this->nbCommentaire = $data['nbCommentaire'];
         }
     }
     
@@ -31,7 +33,7 @@ Class ArticleModel extends Model{
         $this->id = $this->bdd->lastInsertId();
     }
     public function select($id){
-        $req = $this->bdd->prepare('SELECT * FROM article WHERE id = :id');
+        $req = $this->bdd->prepare('SELECT article.*, Count(commentaire.id) as nbCommentaire FROM article LEFT JOIN commentaire ON article.id = commentaire.id_article WHERE article.id = :id');
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->execute();
         return $req->fetch();
@@ -50,6 +52,9 @@ Class ArticleModel extends Model{
         $req = $this->bdd->prepare('DELETE FROM article WHERE id = :id');
         $req->bindValue('id', $this->id, PDO::PARAM_INT);
         $req->execute();
+        if(file_exists(ROOT.'upload/article/'.$this->id.'.jpg')) {
+            unlink(ROOT.'upload/article/'.$this->id.'.jpg');
+        }
     }
     
     public function save(){
@@ -63,9 +68,9 @@ Class ArticleModel extends Model{
     public static function getAll($user_id = null){
         $model = self::getInstance();
         if(!is_null($user_id))
-        $req = $model->bdd->prepare('SELECT id FROM article  WHERE id_user = '.$user_id);
+        $req = $model->bdd->prepare('SELECT id FROM article WHERE id_user = '.$user_id);
         else
-            $req = $model->bdd->prepare('SELECT id FROM article');
+            $req = $model->bdd->prepare('SELECT id FROM article ORDER BY datetime DESC');
         
         $req->execute();
         $articles = array();
@@ -79,6 +84,32 @@ Class ArticleModel extends Model{
     public static function getAllOffset($nbr, $offset){
         $model = self::getInstance();
 		$req = $model->bdd->prepare('SELECT article.id FROM article INNER JOIN user ON article.id_user = user.id  ORDER BY article.datetime DESC LIMIT '.($nbr * $offset).','.$nbr.'');
+        $req->execute();
+        $articles = array();
+        while($row = $req->fetch()){
+            $article = new ArticleModel($row['id']);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+
+    public static function getAllByUserId($id) {
+        $model = self::getInstance();
+        $req = $model->bdd->prepare('SELECT article.id FROM article WHERE article.id_user = :id ORDER BY article.datetime DESC');
+        $req->bindValue('id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $articles = array();
+        while($row = $req->fetch()){
+            $article = new ArticleModel($row['id']);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+
+    public static function getAllByCommentUserId($id) {
+        $model = self::getInstance();
+        $req = $model->bdd->prepare('SELECT article.id FROM article INNER JOIN commentaire on article.id = commentaire.id_article WHERE commentaire.id_user = :id ORDER BY article.datetime DESC');
+        $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->execute();
         $articles = array();
         while($row = $req->fetch()){

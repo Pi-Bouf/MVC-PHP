@@ -1,9 +1,10 @@
 <?php
 
 class CommentaireController extends Controller{
-	/** @todo créer une méthode "postprocess" qui permet à un utilisateur conneté de poster un commentaire, si l'utilisateur n'est pas connecté, afficher le formulaire de connexion */
+	
 	public function postprocess()
 	{
+		UserModel::isActif();
 		$idArticle = $_GET['idArticle'];
 		if(count($_POST))
 		{
@@ -11,10 +12,12 @@ class CommentaireController extends Controller{
 			$commentaire->titre = $_POST['titre'];
 			$commentaire->contenu = $_POST['contenu'];
 			$commentaire->datetime = date("Y-m-d H:i:s");
-			$commentaire->id_user = 1;
+			$user = new UserModel($_SESSION['user_logged']);
+			$commentaire->id_user = $user->id;
 			$commentaire->id_article = $idArticle;
 			$commentaire->save();
-			header('Location: ' . WEBROOT . 'article/detail?id=' + $idArticle);
 		}
+		header('Location:'.WEBROOT.'article/detail?id='.$idArticle);
 	}
 }
+?>

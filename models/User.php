@@ -7,6 +7,8 @@ class UserModel extends Model{
     public $password;
     public $actif;
     public $admin;
+    public $nbArticle;
+    public $nbCommentaire;
 
     public function __construct($id=null) {
 		parent::__construct();
@@ -19,6 +21,8 @@ class UserModel extends Model{
             $this->password = $data['password'];
             $this->actif = $data['actif'];
             $this->admin = $data['admin'];
+            $this->nbArticle = $data['nbArticle'];
+            $this->nbCommentaire = $data['nbCommentaire'];
         }
     }
 
@@ -34,7 +38,7 @@ class UserModel extends Model{
         $this->id = $this->bdd->lastInsertId();
     }
     public function select($id){
-        $req = $this->bdd->prepare('SELECT * FROM user WHERE id = :id');
+        $req = $this->bdd->prepare('SELECT *, (SELECT count(*) FROM article WHERE article.id_user = :id) as nbArticle, (SELECT count(*) FROM commentaire WHERE commentaire.id_user = :id) as nbCommentaire FROM user WHERE id = :id');
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->execute();
         return $req->fetch();
@@ -66,6 +70,11 @@ class UserModel extends Model{
         $req = $this->bdd->prepare('DELETE FROM user WHERE id = :id');
         $req->bindValue('id', $this->id, PDO::PARAM_INT);
         $req->execute();
+        if(file_exists(ROOT.'upload/users/avatar_'.$this->id.'_800.jpg')) {
+            unlink(ROOT.'upload/users/avatar_'.$this->id.'_800.jpg');
+            unlink(ROOT.'upload/users/avatar_'.$this->id.'_500.jpg');
+            unlink(ROOT.'upload/users/avatar_'.$this->id.'_150.jpg');
+        }
     }
 
     public function save(){
@@ -112,10 +121,25 @@ class UserModel extends Model{
         if(isset($_SESSION['user_logged'])) {
             $user = new UserModel($_SESSION['user_logged']);
             if(!($user->actif == 1 && $user->admin == 1)) {
-                header("Location:".WEBROOT."connexion/login");
+                header("Location:".WEBROOT."user/login");
+                exit();
             }
         } else {
-            header("Location:".WEBROOT."connexion/login");
+            header("Location:".WEBROOT."user/login");
+            exit();
+        }
+    }
+
+    public static function isActif() {
+        if(isset($_SESSION['user_logged'])) {
+            $user = new UserModel($_SESSION['user_logged']);
+            if($user->actif != 1) {
+                header("Location:".WEBROOT."user/login");
+                exit();
+            }
+        } else {
+            header("Location:".WEBROOT."user/login");
+            exit();
         }
     }
 
@@ -124,3 +148,4 @@ class UserModel extends Model{
         session_destroy();
     }
 }
+?>

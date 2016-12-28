@@ -1,7 +1,7 @@
 <?php
 
 class Controller {
-    public $vars = array('menu'=>array('article/listarticle'=>'Articles', 'admincommentaire'=>'Commentaires', 'adminuser'=>'Utilisateurs'),
+    public $vars = array('menu'=>array('accueil/index'=>'Articles', 'user/listuser'=>'Utilisateurs'),
                          'menuAdmin'=>array('adminarticle/index'=>"Gestion articles", "admincommentaire/index" => "Gestion commentaires", "adminuser/index" => "Gestion utilisateurs", "export/index" => "Exporter CSV"));
     
     function set($d){

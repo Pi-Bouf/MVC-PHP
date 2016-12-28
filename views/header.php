@@ -20,6 +20,18 @@
             foreach($menu as $key => $value) {
                 echo '<a href="'.WEBROOT.$key.'">'.$value.'</a> ';
             }
+            if(isset($_SESSION['user_logged'])) {
+                $me = new UserModel($_SESSION['user_logged']);
+                if($me->actif == 1) {
+                    echo '<a href="'.WEBROOT.'user/myprofile">Mon profile</a> ';
+                }
+                if($me->admin == 1) {
+                    echo '<a href="'.WEBROOT.'adminaccueil/index">Admin</a> ';
+                }
+                echo '<br /><a href="'.WEBROOT.'user/logout">Déconnexion</a> ';
+            } else {
+                echo '<br /><a href="'.WEBROOT.'user/login">Connexion</a> ';
+            }
         ?>
     </div>
     <div id="header">

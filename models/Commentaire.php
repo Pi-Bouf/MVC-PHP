@@ -78,6 +78,23 @@ class CommentaireModel extends Model{
         return $commentaires;
     }
 
+        /**
+    * @param int $id Identifiant de l'article
+    * @return array Tableau d'Article
+    */
+    public static function getAllByArtId($id){
+        $model = self::getInstance();
+        $req = $model->bdd->prepare('SELECT id FROM commentaire WHERE id_article = :id_article ORDER BY datetime DESC');
+        $req->bindValue('id_article', $id, PDO::PARAM_INT);
+        $req->execute();
+        $commentaires = array();
+        while($row = $req->fetch()){
+            $commentaire = new CommentaireModel($row['id']);
+            $commentaires[] = $commentaire;
+        }
+        return $commentaires;
+    }
+
     public static function deleteByArticle($id_article){
 		$model = self::getInstance();
 

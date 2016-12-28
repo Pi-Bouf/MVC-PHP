@@ -16,7 +16,9 @@
 				<th>Date</th>
 				<th>Action</th>
 			</tr>
-			<?php foreach($articles as $article){ ?>
+		
+			<?php
+			foreach($articles as $article){ ?>
 				<tr>
 					<td><?php echo $article->titre ?></td>
 					<td><?php echo $article->datetime ?></td>

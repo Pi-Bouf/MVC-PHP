@@ -8,10 +8,12 @@
             }
         ?>
 	</div>
-	<form action="<?php echo WEBROOT.'adminarticle/postprocess?id='.$article->id ?>" method="post">
+	<form enctype="multipart/form-data" action="<?php echo WEBROOT.'adminarticle/postprocess?id='.$article->id ?>" method="post">
 		<label for="titre">Titre :</label><input type="text" id="titre" name="titre" value="<?php echo $article->titre ?>" /><br />
 		<label for="contenu">Contenu :</label><br />
 		<textarea id="contenu" name="contenu"><?php echo $article->contenu ?></textarea><br />
+		<label for="article">Avatar: </label>
+		<input type="file" name="articleImage" id="article">
 		<input type="submit" value="Enregistrer" />
 	</form>
 </div>

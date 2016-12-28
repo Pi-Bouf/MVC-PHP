@@ -7,6 +7,7 @@ define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 require(ROOT . 'core/core.php');
 require(ROOT . 'core/controller.php');
 require(ROOT . 'core/model.php');
+require(ROOT . 'includes/crop.php');
 
 //Si on a une url du type www.monsite.com/controller/action on récupère le controller et l'action
 if(isset($_GET['p']) && !empty($_GET['p'])){

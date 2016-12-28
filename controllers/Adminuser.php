@@ -29,6 +29,14 @@ class AdminUserController extends Controller{
 			$user->actif = $_POST['actif'];
 			$user->admin = $_POST['admin'];
 			$user->save();
+			if(!empty($_FILES['avatarImage']['tmp_name'])) {
+				if(move_uploaded_file($_FILES['avatarImage']['tmp_name'], ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'])) {
+					cropImg(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_800.jpg', 800, 800);
+					cropImg(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_500.jpg', 500, 800);
+					cropImg(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name'], ROOT.'upload/users/avatar_'.$user->id.'_150.jpg', 150, 800);
+					unlink(ROOT.'upload/tmp/'.$_FILES['avatarImage']['name']);
+				}
+			}
 		}
 		header('Location: ' . WEBROOT . 'adminuser/index');
 	}
