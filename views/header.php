@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../includes/styles/miw.js"></script>
-    <!-- <script src="../styles/snow.js"></script> -->
+    <script src="../includes/styles/snow.js"></script>
     <link href="../includes/styles/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
