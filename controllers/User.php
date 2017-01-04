@@ -28,11 +28,11 @@ class UserController extends Controller{
 	/**
 	* Procédure renvoyant les informations du compte actuellement connecté
 	*/
-	public function myprofile() {
+	public function myprofil() {
 		UserModel::isActif();
 		$user = new UserModel($_SESSION['user_logged']);
 		$this->set(array("user" => $user));
-		$this->render("myprofile");
+		$this->render("myprofil");
 	}
 
 	/**
@@ -60,7 +60,7 @@ class UserController extends Controller{
 				}
 			}
 		}
-		header('Location:'.WEBROOT.'user/myprofile');
+		header('Location:'.WEBROOT.'user/myprofil');
 	}
 
 	/**

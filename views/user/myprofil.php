@@ -1,5 +1,5 @@
 <div id="container">
-    <h2>Mon profile</h2>
+    <h2>Mon profil</h2>
 
 	<form enctype="multipart/form-data" action="<?php echo WEBROOT.'user/postprocess?id='.$user->id ?>" method="post">
 		<label for="name">Name :</label><input type="text" id="name" name="name" value="<?php echo $user->name ?>" required="required"/><br />

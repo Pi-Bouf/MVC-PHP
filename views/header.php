@@ -23,7 +23,7 @@
             if(isset($_SESSION['user_logged'])) {
                 $me = new UserModel($_SESSION['user_logged']);
                 if($me->actif == 1) {
-                    echo '<a href="'.WEBROOT.'user/myprofile">Mon profile</a> ';
+                    echo '<a href="'.WEBROOT.'user/myprofil">Mon profil</a> ';
                 }
                 if($me->admin == 1) {
                     echo '<a href="'.WEBROOT.'adminaccueil/index">Admin</a> ';
